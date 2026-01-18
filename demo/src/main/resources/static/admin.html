@@ -1211,11 +1211,21 @@ function showEmptyState() {
     let userToDeleteId = null;
 
     function confirmDeleteUser(id, name) {
-        userToDeleteId = id;
-        document.getElementById('deleteConfirmText').textContent = 
-            `Are you sure you want to delete "${name}"? This action cannot be undone.`;
-        document.getElementById('deleteConfirmDialog').classList.add('show');
+    const user = allUsers.find(u => u.id === id);
+
+    if (!user) return;
+
+    if (user.balance > 0) {
+        alert("❌ User balance must be 0 before deletion");
+        return;
     }
+
+    userToDeleteId = id;
+    document.getElementById('deleteConfirmText').textContent =
+        `Are you sure you want to delete "${name}"? This action cannot be undone.`;
+    document.getElementById('deleteConfirmDialog').classList.add('show');
+}
+
 
 
     function closeDeleteConfirm() {

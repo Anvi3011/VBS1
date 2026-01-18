@@ -182,11 +182,16 @@
 <script>
   const API_URL = 'http://localhost:8082';
 
-  function showMessage(elementId, message, type) {
-    const messageEl = document.getElementById(elementId);
-    messageEl.textContent = message;
-    messageEl.className = `message ${type} show`;
-  }
+  const showMessage = (id, text, type) => {
+    const msg = document.getElementById(id);
+
+    // reset everything first
+    msg.classList.remove("success", "error", "show");
+
+    msg.innerText = text;
+    msg.classList.add("message", type, "show");
+};
+
 
   document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
